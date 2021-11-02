@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<form name="pcd" method="post" action="/calculo">
+    <input type="number" name="contrato" placeholder="contrato">
+    <input type="number" name="banco" placeholder="banco">
+    <input type="number" name="data_ultima_parcela" placeholder="data da ultima parcela">
+    <input type="number" name="quantidade_de_parcelas" placeholder="quantidade de parcelas">
+    <input type="number" name="valor_da_parcela" placeholder="valor da parcela">
+    <input type="number" name="valor_emprestado" placeholder="valor emprestado">
+    <button class="btn btn-primary">Enviar</button>
+</form>
+
+{% endblock %}
