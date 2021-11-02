@@ -3,9 +3,9 @@
 {% block conteudo %}
     <table class="table table-secondary table-striped">
         <tr><td>Contrato:</td><td>{{contrato}}</td></tr>
-        <tr><td>ISPB/Banco</td><td>{{banco}}</td></tr>
-        <tr><td>Taxa de juros original</td><td>{{taxa_de_juros}}</td></tr>
-        <tr><td>Meses em ser</td><td>{{meses_em_ser}}</td></tr>
-        <tr><td>Saldo devedor</td><td>{{saldo_devedor|round(2)}}</td></tr>
+        <tr><td>ISPB/Banco:</td><td>{{banco}}</td></tr>
+        <tr><td>Taxa de juros original (%):</td><td>{{taxa_de_juros|round(2)|replace('.',',')}}</td></tr>
+        <tr><td>Meses em ser:</td><td>{{meses_em_ser}}</td></tr>
+        <tr><td>Saldo devedor (R$):</td><td>{{saldo_devedor|round(2)|replace('.',',')}}</td></tr>
     </table>
 {% endblock %}

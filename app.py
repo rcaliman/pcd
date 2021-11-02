@@ -64,14 +64,14 @@ def calculo():
         valor_emprestado = formata_valor(request.form.get('valor_emprestado'))
 
         hoje = formata_data(date.today().strftime('%d%m%Y'))
-        taxa_de_juros = round((rate(quantidade_de_parcelas, -valor_da_parcela, valor_emprestado, 0) * 100), 2)
+        taxa_de_juros = rate(quantidade_de_parcelas, -valor_da_parcela, valor_emprestado, 0)
         meses_em_ser = calcula_meses(hoje, data_ultima_parcela)
         saldo_devedor = pv(taxa_de_juros/100, meses_em_ser, -valor_da_parcela,)
 
         return render_template('calculo.html',
                                contrato=contrato,
                                banco=busca_ispb(banco),
-                               taxa_de_juros=taxa_de_juros,
+                               taxa_de_juros=taxa_de_juros * 100,
                                meses_em_ser=meses_em_ser,
                                saldo_devedor=saldo_devedor,
                                )
