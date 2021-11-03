@@ -66,7 +66,7 @@ def calculo():
         # hoje = formata_data(date.today().strftime('%d%m%Y'))
         taxa_de_juros = rate(quantidade_de_parcelas, -valor_da_parcela, valor_emprestado, 0)
         meses_em_ser = calcula_meses(data_primeira_parcela, data_ultima_parcela)
-        saldo_devedor = abs(pv(taxa_de_juros/100, meses_em_ser, valor_da_parcela,))
+        saldo_devedor = abs(pv(taxa_de_juros, meses_em_ser, valor_da_parcela,))
 
         return render_template('calculo.html',
                                banco=busca_ispb(banco),
