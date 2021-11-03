@@ -56,20 +56,19 @@ def inicio():
 @app.route('/calculo', methods=['POST'])
 def calculo():
     try:
-        contrato = request.form.get('contrato')
         banco = request.form.get('banco')
+        data_primeira_parcela = formata_data(request.form.get('data_primeira_parcela'))
         data_ultima_parcela = formata_data(request.form.get('data_ultima_parcela'))
         quantidade_de_parcelas = int(request.form.get('quantidade_de_parcelas'))
         valor_da_parcela = formata_valor(request.form.get('valor_da_parcela'))
         valor_emprestado = formata_valor(request.form.get('valor_emprestado'))
 
-        hoje = formata_data(date.today().strftime('%d%m%Y'))
+        # hoje = formata_data(date.today().strftime('%d%m%Y'))
         taxa_de_juros = rate(quantidade_de_parcelas, -valor_da_parcela, valor_emprestado, 0)
-        meses_em_ser = calcula_meses(hoje, data_ultima_parcela)
-        saldo_devedor = pv(taxa_de_juros/100, meses_em_ser, -valor_da_parcela,)
+        meses_em_ser = calcula_meses(data_primeira_parcela, data_ultima_parcela)
+        saldo_devedor = pv(taxa_de_juros/100, meses_em_ser, valor_da_parcela,)
 
         return render_template('calculo.html',
-                               contrato=contrato,
                                banco=busca_ispb(banco),
                                taxa_de_juros=taxa_de_juros * 100,
                                meses_em_ser=meses_em_ser,
