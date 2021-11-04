@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+    <title>calculo de pcd - rcaliman</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -8,10 +10,75 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
+    <style>
+        .form {
+            padding: 10px 10px;
+        }
+
+        .resultado {
+            padding: 10px 10px;
+        }
+
+        input {
+            width: 130px;
+            text-align: center;
+        }
+
+        .btn {
+            width: 130px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        .centro {
+            text-align: center;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: lightyellow;
+        }
+
+        .navbar a:hover {
+            color: lightskyblue;
+        }
+
+        .table-navbar td {
+            padding-left: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
 </head>
-    <body>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">calculo de pcd</a>
+
+            <span class="navbar-text">
+                <table class='table-navbar'>
+                    <tr>
+                        <td>
+                            <a href='https://meu.inss.gov.br/' target=#>» meu inss</a>
+                        </td>
+                        <td>
+                            <a href='https://www3.bcb.gov.br/CALCIDADAO/publico/exibirFormFinanciamentoPrestacoesFixas.do?method=exibirFormFinanciamentoPrestacoesFixas'
+                                target=#>» calculadora do cidadao</a>
+                        </td>
+                    </tr>
+                </table>
+            </span>
+        </div>
+        </div>
+    </nav>
     {% block conteudo %}
 
     {% endblock %}
-    </body>
+</body>
+
 </html>

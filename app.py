@@ -36,7 +36,7 @@ def busca_ispb(_banco):
         reader = csv.reader(csvfile, delimiter=',')
         for linha in reader:
             if linha[0] == str(int(_banco)):
-                return f'{linha[1]}\t{linha[2]}'
+                return {'ispb':linha[1], 'nome':linha[2]}
 
 
 def formata_valor(_valor):
@@ -57,15 +57,14 @@ def inicio():
 def calculo():
     try:
         banco = request.form.get('banco')
-        data_primeira_parcela = formata_data(request.form.get('data_primeira_parcela'))
+        data_proxima_parcela = formata_data(request.form.get('data_proxima_parcela'))
         data_ultima_parcela = formata_data(request.form.get('data_ultima_parcela'))
         quantidade_de_parcelas = int(request.form.get('quantidade_de_parcelas'))
         valor_da_parcela = formata_valor(request.form.get('valor_da_parcela'))
         valor_emprestado = formata_valor(request.form.get('valor_emprestado'))
 
-        # hoje = formata_data(date.today().strftime('%d%m%Y'))
         taxa_de_juros = rate(quantidade_de_parcelas, -valor_da_parcela, valor_emprestado, 0)
-        meses_em_ser = calcula_meses(data_primeira_parcela, data_ultima_parcela)
+        meses_em_ser = calcula_meses(data_proxima_parcela, data_ultima_parcela)
         saldo_devedor = abs(pv(taxa_de_juros, meses_em_ser, valor_da_parcela,))
 
         return render_template('calculo.html',
@@ -78,5 +77,12 @@ def calculo():
         return 'Desculpe-me mas você provavelmente digitou algum dado incorretamente. Retorne e confira.'
 
 
-app.run(host='0.0.0.0', port=5004)
-#app.run(port=5004, debug=True)
+@app.route('/buscar_ispb', methods=['POST'])
+def buscar_ispb():
+    banco = busca_ispb(request.form.get('codigo_banco'))
+    return render_template('ispb.html',
+        banco=banco)
+
+
+# app.run(host='0.0.0.0', port=5004)
+app.run(port=5004, debug=True)

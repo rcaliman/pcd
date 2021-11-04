@@ -2,35 +2,57 @@
 
 {% block conteudo %}
 
-<form name="pcd" method="post" action="/calculo">
-    <table border="0">
-        <tr>
-            <th>codigo do banco</th>
-            <th>proxima parcela em ser</th>
-            <th>ultima parcela em ser</th>
-            <th>quantidade parcelas</th>
-            <th>valor das parcelas</th>
-            <th>valor emprestado</th>
-            <th>&nbsp;</th>
-        </tr>
-        <tr>
-            <td><input type="number" name="banco" required></td>
-            <td><input type="number" name="data_primeira_parcela" placeholder="DDMMAAAA" required></td>
-            <td><input type="number" name="data_ultima_parcela" placeholder="DDMMAAAA" required></td>
-            <td><input type="number" name="quantidade_de_parcelas" required></td>
-            <td><input type="number" name="valor_da_parcela" required></td>
-            <td><input type="number" name="valor_emprestado" required></td>
-            <td><button class="btn btn-primary btn-sm">Enviar</button></td>
-        </tr>
-        <tr>
-            <td colspan=7>
-                   <em>Atenção:<br>
-                    Em todos os campos digite apenas números, sem qualquer outro tipo de caracter.<br>
-                    Nos campos monetários coloque os centavos mas sem pontos, vírgulas ou espaços.
-                </em> 
-            </td>
-        </tr>
-    </table>
-</form>
+<div class='form'>
+    <form name="pcd" method="post" action="/calculo">
+        <table class='table table-secondary table-striped'>
+            <tr>
+                <th>codigo do banco</th>
+                <th>próxima parcela</th>
+                <th>última parcela</th>
+                <th>quantidade parcelas</th>
+                <th>valor das parcelas</th>
+                <th>valor emprestado</th>
+                <th>cálculo</th>
+            </tr>
+            <tr>
+                <td class='centro'><input type="number" name="banco" required></td>
+                <td class='centro'><input type="number" name="data_proxima_parcela" placeholder="DDMMAAAA" required></td>
+                <td class='centro'><input type="number" name="data_ultima_parcela" placeholder="DDMMAAAA" required></td>
+                <td class='centro'><input type="number" name="quantidade_de_parcelas" required></td>
+                <td class='centro'><input type="number" name="valor_da_parcela" required></td>
+                <td class='centro'><input type="number" name="valor_emprestado" required></td>
+                <td class='centro'>
+                        <button class="btn btn-primary btn-sm">calcular</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=7>
+                    <em><b>Atenção:</b><br>
+                        Em todos os campos digite apenas números, sem qualquer outro tipo de caracter.<br>
+                        Nos campos monetários coloque os centavos mas sem pontos, vírgulas ou espaços.
+                    </em>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+    <form name="busca_ispb" method="post" action="/buscar_ispb" class='form'>
+        <table class='table table-secondary table-striped d-block'>
+            <tr>
+                <th colspan=2>
+                    Buscar ISPB
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type='text' name='codigo_banco' placeholder="código do banco" required>
+                </td>
+                <td>
+                    <button class='btn btn-primary btn-sm'>buscar</button>
+                </td>
+            </tr>
+        </table>
+    </form>
 
 {% endblock %}

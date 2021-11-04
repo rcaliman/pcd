@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div class='resultado'>
+    <table class="table table-secondary table-striped resultado">
+        <tr>
+            <td>ISPB:</td>
+            <td>{{banco['ispb']}}</td>
+        </tr>
+        <tr>
+            <td>Banco:</td>
+            <td>{{banco['nome']}}</td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <center><a href="{{url_for('inicio')}}">[ voltar ]</a></center>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
