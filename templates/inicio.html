@@ -2,57 +2,75 @@
 
 {% block conteudo %}
 
-<div class='form'>
-    <form name="pcd" method="post" action="/calculo">
-        <table class='table table-secondary table-striped'>
-            <tr>
-                <th>código do banco</th>
-                <th>próxima parcela</th>
-                <th>última parcela</th>
-                <th>quantidade de parcelas</th>
-                <th>valor das parcelas</th>
-                <th>valor emprestado</th>
-                <th>cálculo</th>
-            </tr>
-            <tr>
-                <td class='centro'><input type="number" name="banco" required></td>
-                <td class='centro'><input type="number" name="data_proxima_parcela" placeholder="DDMMAAAA" required></td>
-                <td class='centro'><input type="number" name="data_ultima_parcela" placeholder="DDMMAAAA" required></td>
-                <td class='centro'><input type="number" name="quantidade_de_parcelas" required></td>
-                <td class='centro'><input type="number" name="valor_da_parcela" required></td>
-                <td class='centro'><input type="number" name="valor_emprestado" required></td>
-                <td class='centro'>
-                        <button class="btn btn-primary btn-sm">calcular</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan=7>
-                    <em><b>Atenção:</b><br>
-                        Em todos os campos digite apenas números, sem qualquer outro tipo de caracter.<br>
-                        Nos campos monetários coloque os centavos mas sem pontos, vírgulas ou espaços.
-                    </em>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
+<form name="pcd" method="post" action="/calculo">
+    <div class='container-fluid'>
+        <div class='row mt-3 p-2 inputs'>
+            <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
+                <input class='form-control' type="number" name="banco" id='banco' required>
+                <span class="badge bg-secondary">código do banco</span>
+            </div>
+            <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
+                <input class='form-control' placeholder='ddmmaaaa' type="number" id='proxima-parcela'
+                    name="data_proxima_parcela" required>
+                <span class="badge bg-secondary">próxima parcela</span>
+            </div>
+            <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
+                <input class='form-control' placeholder='ddmmaaaa' type="number" id='ultima-parcela'
+                    name="data_ultima_parcela" required>
+                <span class="badge bg-secondary">última parcela</span>
+            </div>
+            <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
+                <input class='form-control' type="number" id='quantidade-de-parcelas' name="quantidade_de_parcelas"
+                    required>
+                <span class="badge bg-secondary">quantidade de parcelas</span>
+            </div>
+            <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
+                <input class='form-control' type="number" id='valor-da-parcela' name="valor_da_parcela" required>
+                <span class="badge bg-secondary">valor da parcela</span>
+            </div>
+            <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
+                <input class='form-control' id='valor-emprestado' type="number" name="valor_emprestado" required>
+                <span class="badge bg-secondary">valor emprestado</span>
+            </div>
+        </div>
 
-    <form name="busca_ispb" method="post" action="/buscar_ispb" class='form'>
-        <table class='table table-secondary table-striped d-block'>
-            <tr>
-                <th colspan=2>
-                    buscar ispb
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    <input type='text' name='codigo_banco' placeholder="código do banco" required>
-                </td>
-                <td>
-                    <button class='btn btn-primary btn-sm'>buscar</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+
+        <div class='row p-2 inputs2'>
+            <div class='col-sm-12 col-md-10'>
+                <em>
+                    <b>Atenção:</b><br>
+                    Em todos os campos digite apenas números, sem qualquer outro tipo de caracter.<br>
+                    Nos campos monetários coloque os centavos mas sem pontos, vírgulas ou espaços.
+                </em>
+            </div>
+            <div class='col-sm-12 col-md-2 p-1 justify-content-sm-center d-flex align-items-center'>
+                <div>
+                    <button id='calcular' class="btn btn-primary">calcular</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form name="busca_ispb" method="post" action="/buscar_ispb" class='form'>
+    <div class='row'>
+        <div class='col-sm-12 col-md-6 col-lg-4'>
+            <div class='row mt-3 inputs'>
+                <div class='col-12'>
+                    <b>buscar ispb</b>
+                </div>
+            </div>
+            <div class='row p-2 inputs2'>
+                <div class='col-6'>
+                    <input class='form-control' type='text' name='codigo_banco' required>
+                    <span class="badge bg-secondary">código do banco</span>
+                </div>
+                <div class='col-2'>
+                    <button class='btn btn-primary'>buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 {% endblock %}
