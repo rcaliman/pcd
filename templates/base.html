@@ -82,6 +82,7 @@
             text-decoration: none;
             color: lightyellow;
             font-size: 0.9em;
+            padding-left: 10px;
         }
 
         .footer a:hover {
@@ -100,9 +101,6 @@
                 <table class='table-navbar'>
                     <tr>
                         <td>
-                            <a href={{ url_for('calculos_anteriores') }} target=#>» calculos anteriores</a>
-                        </td>
-                        <td>
                             <a href='https://meu.inss.gov.br/' target='#'>» meu inss</a>
                         </td>
                         <td>
@@ -118,7 +116,8 @@
 
     {% endblock %}
     <div class='footer'>
-        &#10165; <a href='https://github.com/rcaliman/pcd' target='#'>github</a>
+        <a href={{ url_for('calculos_anteriores') }} target=#>&#10165; calculos anteriores</a>
+        <a href='https://github.com/rcaliman/pcd' target='#'>&#10165; github</a>
     </div>
 </body>
 
