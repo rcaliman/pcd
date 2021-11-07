@@ -2,7 +2,7 @@
 
 {% block conteudo %}
 <div class='resultado'>
-    <table class="table table-secondary table-striped resultado">
+    <table class="table table-secondary table-striped calculos_anteriores">
         <tr>
             <td>ISPB:</td>
             <td>{{banco['ispb']}}</td>
@@ -13,7 +13,7 @@
         </tr>
         <tr>
             <td colspan=2>
-                <center><a href="{{url_for('inicio')}}">[ voltar ]</a></center>
+                <center><a class='btn btn-sm btn-primary' href="{{url_for('inicio')}}">voltar</a></center>
             </td>
         </tr>
     </table>

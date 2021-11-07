@@ -61,9 +61,32 @@
         .table-navbar td {
             padding-left: 20px;
         }
-
         a {
             text-decoration: none;
+        }
+        #calculos-anteriores td{
+            text-align: end;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #0d6efd;
+            color: white;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .footer a {
+            text-decoration: none;
+            color: lightyellow;
+            font-size: 0.9em;
+        }
+
+        .footer a:hover {
+            color: lightskyblue;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -77,11 +100,14 @@
                 <table class='table-navbar'>
                     <tr>
                         <td>
-                            <a href='https://meu.inss.gov.br/' target=#>» meu inss</a>
+                            <a href={{ url_for('calculos_anteriores') }} target=#>» calculos anteriores</a>
+                        </td>
+                        <td>
+                            <a href='https://meu.inss.gov.br/' target='#'>» meu inss</a>
                         </td>
                         <td>
                             <a href='https://www3.bcb.gov.br/CALCIDADAO/publico/exibirFormFinanciamentoPrestacoesFixas.do?method=exibirFormFinanciamentoPrestacoesFixas'
-                                target=#>» calculadora do cidadao</a>
+                                target='#'>» calculadora do cidadao</a>
                         </td>
                     </tr>
                 </table>

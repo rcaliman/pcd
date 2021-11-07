@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div class='resultado'>
+    <table id='calculos-anteriores' class="table table-secondary table-striped resultado">
+        <tr>
+            <th>data</th>
+            <th>próxima parcela</th>
+            <th>ultima parcela</th>
+            <th>total de parcelas</th>
+            <th>valor da parcela</th>
+            <th>valor do empréstimo</th>
+            <th>taxa de juros</th>
+            <th>parcelas em ser</th>
+            <th>valor em ser</th>
+        </tr>
+        {{ calculos|safe }}
+        <tr>
+            <td colspan=10>
+                <center><a class='btn btn-sm btn-primary' href="{{url_for('inicio')}}">voltar</a></center>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}
