@@ -61,8 +61,8 @@ def str_to_date(_data: str) -> str:
 
 def insere_valores(_dados: tuple) -> None:
     with closing(sqlite3.connect('pcd.db')) as conn:
-        _dados_tratados = str_to_date(_dados[0]), str_to_date(_dados[1]), _dados[2], _dados[3],\
-            _dados[4], _dados[5], _dados[6], _dados[7] 
+        _dados_tratados = str_to_date(_dados[0]), str_to_date(_dados[1]), _dados[2], _dados[3], \
+                          _dados[4], _dados[5], _dados[6], _dados[7]
         with conn as cur:
             query_inserir = '''insert into pcd(data_calculo, proxima_parcela,
                 ultima_parcela, quantidade_de_parcelas, valor_da_parcela, valor_emprestado,
@@ -81,7 +81,7 @@ def busca_calculos() -> list:
         with conn as cur:
             query_buscar = '''select id, data_calculo, proxima_parcela, ultima_parcela,
                 quantidade_de_parcelas, valor_da_parcela, valor_emprestado, taxa_de_juros,
-                meses_em_ser, saldo_devedor from pcd order by id desc limit 10;''' 
+                meses_em_ser, saldo_devedor from pcd order by id desc limit 10;'''
             _dados = cur.execute(query_buscar).fetchall()
     return _dados
 
@@ -107,13 +107,13 @@ def html_calculos_anteriores() -> str:
         html += '<td>' + date_to_html(str(i[2])) + '</td>'
         html += '<td>' + date_to_html(str(i[3])) + '</td>'
         html += '<td>' + str(i[4]) + '</td>'
-        html += '<td>' + str(round(i[5], 2)).replace('.',',') + '</td>'
-        html += '<td>' + str(round(i[6], 2)).replace('.',',') + '</td>'
-        html += '<td>' + str(round(i[7], 2)).replace('.',',') + '</td>'
+        html += '<td>' + str(round(i[5], 2)).replace('.', ',') + '</td>'
+        html += '<td>' + str(round(i[6], 2)).replace('.', ',') + '</td>'
+        html += '<td>' + str(round(i[7], 2)).replace('.', ',') + '</td>'
         html += '<td>' + str(i[8]) + '</td>'
-        html += '<td>' + str(round(i[9], 2)).replace('.',',') + '</td>'
+        html += '<td>' + str(round(i[9], 2)).replace('.', ',') + '</td>'
         html += '</tr>'
-    return html    
+    return html
 
 
 @app.route('/')
@@ -134,8 +134,8 @@ def calculo():
         meses_em_ser = calcula_meses(data_proxima_parcela, data_ultima_parcela)
         saldo_devedor = abs(pv(taxa_de_juros, meses_em_ser, valor_da_parcela, ))
         dados_banco = request.form.get('data_proxima_parcela'), request.form.get('data_ultima_parcela'), \
-                      quantidade_de_parcelas, valor_da_parcela, valor_emprestado, taxa_de_juros * 100, \
-                      meses_em_ser, saldo_devedor
+            quantidade_de_parcelas, valor_da_parcela, valor_emprestado, taxa_de_juros * 100, \
+            meses_em_ser, saldo_devedor
         insere_valores(dados_banco)
 
         return render_template('calculo.html',
@@ -170,7 +170,7 @@ def buscar_ispb():
 @app.route('/calculos_anteriores', methods=['GET'])
 def calculos_anteriores():
     return render_template('calculos_anteriores.html',
-                            calculos=html_calculos_anteriores())
+                           calculos=html_calculos_anteriores())
 
 
 # app.run(host='0.0.0.0', port=5004)
