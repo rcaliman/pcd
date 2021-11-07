@@ -96,20 +96,6 @@
     <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">calculo de pcd</a>
-
-            <span class="navbar-text">
-                <table class='table-navbar'>
-                    <tr>
-                        <td>
-                            <a href='https://meu.inss.gov.br/' target='#'>» meu inss</a>
-                        </td>
-                        <td>
-                            <a href='https://www3.bcb.gov.br/CALCIDADAO/publico/exibirFormFinanciamentoPrestacoesFixas.do?method=exibirFormFinanciamentoPrestacoesFixas'
-                                target='#'>» calculadora do cidadao</a>
-                        </td>
-                    </tr>
-                </table>
-            </span>
         </div>
     </nav>
     {% block conteudo %}
@@ -117,6 +103,9 @@
     {% endblock %}
     <div class='footer'>
         <a href={{ url_for('calculos_anteriores') }} target=#>&#10165; calculos anteriores</a>
+        <a href='https://www3.bcb.gov.br/CALCIDADAO/publico/exibirFormFinanciamentoPrestacoesFixas.do?method=exibirFormFinanciamentoPrestacoesFixas'
+                                target='#'>&#10165; calculadora do cidadao</a>
+        <a href='https://meu.inss.gov.br/' target='#'>&#10165; meu inss</a>
         <a href='https://github.com/rcaliman/pcd' target='#'>&#10165; github</a>
     </div>
 </body>
