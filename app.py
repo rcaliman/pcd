@@ -188,4 +188,4 @@ def calculos_anteriores():
 
 
 # app.run(host='0.0.0.0', port=5004)
-app.run(port=5004, debug=True, host='0.0.0.0')
+app.run(port=5004, debug=False, host='0.0.0.0')
