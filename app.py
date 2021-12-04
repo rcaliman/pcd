@@ -68,7 +68,6 @@ def insere_valores(_dados: tuple) -> None:
                 ultima_parcela, quantidade_de_parcelas, valor_da_parcela, valor_emprestado,
                 taxa_de_juros, meses_em_ser, saldo_devedor)
                 values(date(), '{}', '{}', {}, {}, {}, {}, {}, {});'''.format(*_dados_tratados)
-            print(query_inserir)
             cur.execute(query_inserir)
 
 
@@ -144,20 +143,35 @@ def calculo():
                                meses_em_ser=meses_em_ser,
                                saldo_devedor=saldo_devedor,
                                )
-    except (ValueError, Exception):
-        return """ 
-                    <center>
-                        <table>
-                            <tr>
-                                <td style='background-color: red; color: white; padding-top:15px;'>
-                                    <h3 style='padding-left: 10px; padding-right: 10px;'>
-                                        Desculpe-me mas você provavelmente digitou algum dado incorretamente.
-                                        Retorne e confira.</h4>
-                                </td>
-                            </tr>
-                        </table>
-                    </center>
-               """
+    except Exception as e:
+        if 'day' or 'month' or 'year' in char(e):
+             return """ 
+                        <center>
+                            <table>
+                                <tr>
+                                    <td style='background-color: red; color: white; padding-top:15px;'>
+                                        <h3 style='padding-left: 10px; padding-right: 10px;'>
+                                            erro: por favor volte e confira os campos de data.
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+                   """
+        else:
+            return """ 
+                        <center>
+                            <table>
+                                <tr>
+                                    <td style='background-color: red; color: white; padding-top:15px;'>
+                                        <h3 style='padding-left: 10px; padding-right: 10px;'>
+                                            erro: por favor volte e confira se os campos foram preenchidos conforme as indicações.
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+                   """
 
 
 @app.route('/buscar_ispb', methods=['POST'])
