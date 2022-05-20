@@ -1,11 +1,36 @@
 from flask import Flask, render_template, request
 from numpy_financial import rate, pv
 from datetime import date
+from time import strftime
+from os.path import isfile
 from contextlib import closing
+import requests
 import sqlite3
 import csv
 
 app = Flask(__name__)
+
+def busca_ultimo_registro() -> tuple:
+    with closing(sqlite3.connect('pcd.db')) as conn:
+        with closing(conn) as cur:
+            query = """ select * from pcd order by id desc limit 1"""
+            dados = cur.execute(query).fetchall()
+            return dados[0]
+
+
+
+def baixa_bancos():
+    arquivo = requests.get('http://www.bcb.gov.br/pom/spb/ing/ParticipantesSTRIng.CSV')
+    data_ultimo = busca_ultimo_registro()[1]
+    data_atual = strftime('%Y-%m-%d')
+    nao_atualizado = data_atual > data_ultimo
+    nao_existe = not(isfile('bancos.csv'))
+    if nao_atualizado or nao_existe:
+        if arquivo.status_code == 200:
+            f = open('bancos.csv', 'w')
+            f.write(str(arquivo.content.decode('utf-8')))
+            f.close()
+
 
 
 def formata_data(data: str) -> date:
@@ -34,11 +59,16 @@ def busca_ispb(_banco: str) -> dict:
     :param _banco: str
     :return: str
     """
+    if len(_banco) == 1:
+        _banco = '00' + _banco
+    elif len(_banco) == 2:
+        _banco = '0' + _banco
+
     with open('bancos.csv', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for linha in reader:
-            if linha[0] == str(int(_banco)):
-                return {'ispb': linha[1], 'nome': linha[2]}
+            if linha[2] == _banco:
+                return {'ispb': linha[0], 'nome': linha[5]}
 
 
 def formata_valor(_valor: str) -> float:
@@ -117,6 +147,7 @@ def html_calculos_anteriores() -> str:
 
 @app.route('/')
 def inicio():
+    baixa_bancos()
     return render_template('inicio.html')
 
 
@@ -144,34 +175,24 @@ def calculo():
                                saldo_devedor=saldo_devedor,
                                )
     except Exception as e:
-        if 'day' or 'month' or 'year' in char(e):
-             return """ 
-                        <center>
-                            <table>
-                                <tr>
-                                    <td style='background-color: red; color: white; padding-top:15px;'>
-                                        <h3 style='padding-left: 10px; padding-right: 10px;'>
-                                            erro: por favor volte e confira os campos de data.
-                                        </h3>
-                                    </td>
-                                </tr>
-                            </table>
-                        </center>
-                   """
-        else:
-            return """ 
-                        <center>
-                            <table>
-                                <tr>
-                                    <td style='background-color: red; color: white; padding-top:15px;'>
-                                        <h3 style='padding-left: 10px; padding-right: 10px;'>
-                                            erro: por favor volte e confira se os campos foram preenchidos conforme as indicações.
-                                        </h3>
-                                    </td>
-                                </tr>
-                            </table>
-                        </center>
-                   """
+        return  f""" 
+                    <center>
+                        <table>                                
+                            <tr>
+                                 <td style='background-color: red; color: white; padding-top:15px;'>
+                                    <h3 style='padding-left: 10px; padding-right: 10px;'>
+                                        erro: por favor volte e confira se os campos foram preenchidos conforme as indicações.
+                                    </h3>
+                                    <center>
+                                        <p>
+                                            {e}
+                                        </p>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                """
 
 
 @app.route('/buscar_ispb', methods=['POST'])
@@ -188,4 +209,4 @@ def calculos_anteriores():
 
 
 # app.run(host='0.0.0.0', port=5004)
-app.run(port=5004, debug=False, host='0.0.0.0')
+app.run(port=5004, debug=True, host='0.0.0.0')
