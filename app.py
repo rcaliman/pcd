@@ -74,6 +74,8 @@ def busca_ispb(_banco: str) -> dict:
         for linha in reader:
             if linha[2] == _banco:
                 return {'ispb': linha[0], 'nome': linha[5]}
+            else:
+                return {'ispb': 'não encontrado', 'nome': 'não encontrado'}
 
 
 def formata_valor(_valor: str) -> float:

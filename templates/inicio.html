@@ -6,30 +6,30 @@
     <div class='container-fluid'>
         <div class='row mt-3 p-2 inputs'>
             <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
-                <input class='form-control' type="number" name="banco" id='banco' required>
+                <input class='form-control' placeholder='000' type="number" name="banco" id='banco' required>
                 <span class="badge bg-secondary">código do banco</span>
             </div>
             <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
-                <input class='form-control' placeholder='ddmmaaaa' type="number" id='proxima-parcela'
+                <input class='form-control' placeholder='01012022' type="number" id='proxima-parcela'
                     name="data_proxima_parcela" required>
                 <span class="badge bg-secondary">próxima parcela</span>
             </div>
             <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
-                <input class='form-control' placeholder='ddmmaaaa' type="number" id='ultima-parcela'
+                <input class='form-control' placeholder='01012023' type="number" id='ultima-parcela'
                     name="data_ultima_parcela" required>
                 <span class="badge bg-secondary">última parcela</span>
             </div>
             <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
-                <input class='form-control' type="number" id='quantidade-de-parcelas' name="quantidade_de_parcelas"
+                <input class='form-control' type="number" placeholder='00' id='quantidade-de-parcelas' name="quantidade_de_parcelas"
                     required>
                 <span class="badge bg-secondary">quantidade de parcelas</span>
             </div>
             <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
-                <input class='form-control' type="number" id='valor-da-parcela' name="valor_da_parcela" required>
+                <input class='form-control' type="number" placeholder='00000' id='valor-da-parcela' name="valor_da_parcela" required>
                 <span class="badge bg-secondary">valor da parcela</span>
             </div>
             <div class='col-sm-12 col-md-4 col-lg-2 p-1'>
-                <input class='form-control' id='valor-emprestado' type="number" name="valor_emprestado" required>
+                <input class='form-control' id='valor-emprestado' type="number" placeholder='000000' name="valor_emprestado" required>
                 <span class="badge bg-secondary">valor emprestado</span>
             </div>
         </div>
@@ -57,12 +57,12 @@
         <div class='col-sm-12 col-md-6 col-lg-4'>
             <div class='row mt-3 inputs'>
                 <div class='col-12'>
-                    <b>digite o número do banco e ache o código ispb:</b>
+                    <b>digite o codigo do banco e ache o ispb:</b>
                 </div>
             </div>
             <div class='row p-2 inputs2'>
                 <div class='col-6'>
-                    <input class='form-control' type='text' name='codigo_banco' required>
+                    <input class='form-control' placeholder='000' type='text' name='codigo_banco' required>
                     <span class="badge bg-secondary">código do banco</span>
                 </div>
                 <div class='col-2'>
