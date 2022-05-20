@@ -17,7 +17,12 @@ def busca_ultimo_registro() -> tuple:
             dados = cur.execute(query).fetchall()
             return dados[0]
 
-
+def busca_total_calculos_diarios() -> int:
+    with closing(sqlite3.connect('pcd.db')) as conn:
+        with closing(conn) as cur:
+            query = """select count(*) from pcd where data_calculo = '2022-05-20';"""
+            dados = cur.execute(query).fetchall()
+            return dados[0][0]
 
 def baixa_bancos():
     arquivo = requests.get('http://www.bcb.gov.br/pom/spb/ing/ParticipantesSTRIng.CSV')
@@ -147,8 +152,10 @@ def html_calculos_anteriores() -> str:
 
 @app.route('/')
 def inicio():
+    print(busca_total_calculos_diarios())
     baixa_bancos()
-    return render_template('inicio.html')
+    return render_template('inicio.html',
+                            quantidade_calculos = busca_total_calculos_diarios())
 
 
 @app.route('/calculo', methods=['POST'])
