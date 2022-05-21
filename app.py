@@ -26,7 +26,7 @@ def busca_ultimo_registro() -> tuple:
 def busca_total_calculos_diarios() -> int:
     with closing(sqlite3.connect('pcd.db')) as conn:
         with closing(conn) as cur:
-            query = """select count(*) from pcd where data_calculo = '2022-05-20';"""
+            query = f"""select count(*) from pcd where data_calculo = '{strftime('%Y-%m-%d')}';"""
             dados = cur.execute(query).fetchall()
             return dados[0][0]
 
@@ -161,7 +161,6 @@ def html_calculos_anteriores() -> str:
 
 @app.route('/')
 def inicio():
-    print(busca_total_calculos_diarios())
     baixa_bancos()
     return render_template('inicio.html',
                             quantidade_calculos = busca_total_calculos_diarios(),
@@ -227,4 +226,4 @@ def calculos_anteriores():
 
 
 # app.run(host='0.0.0.0', port=5004)
-app.run(port=5004, debug=True, host='0.0.0.0')
+app.run(port=5004, debug=False, host='0.0.0.0')
