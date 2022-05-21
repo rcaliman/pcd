@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from numpy_financial import rate, pv
-from datetime import date
+from datetime import datetime, date, timedelta
 from time import strftime
 from os.path import isfile
 from contextlib import closing
@@ -9,6 +9,12 @@ import sqlite3
 import csv
 
 app = Flask(__name__)
+
+
+def datas_exemplos() -> dict:
+    proxima_data = (datetime.now() + timedelta(days=5)).strftime("%d%m%Y")
+    ultima_data = (datetime.now() + timedelta(days=706)).strftime("%d%m%Y")
+    return {'proxima_data': proxima_data, 'ultima_data': ultima_data}
 
 def busca_ultimo_registro() -> tuple:
     with closing(sqlite3.connect('pcd.db')) as conn:
@@ -158,7 +164,9 @@ def inicio():
     print(busca_total_calculos_diarios())
     baixa_bancos()
     return render_template('inicio.html',
-                            quantidade_calculos = busca_total_calculos_diarios())
+                            quantidade_calculos = busca_total_calculos_diarios(),
+                            datas_exemplos = datas_exemplos()
+                            )
 
 
 @app.route('/calculo', methods=['POST'])
@@ -219,4 +227,4 @@ def calculos_anteriores():
 
 
 # app.run(host='0.0.0.0', port=5004)
-app.run(port=5004, debug=False, host='0.0.0.0')
+app.run(port=5004, debug=True, host='0.0.0.0')
