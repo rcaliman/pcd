@@ -7,9 +7,14 @@ from contextlib import closing
 import requests
 import sqlite3
 import csv
+import os
 
 app = Flask(__name__)
 
+
+def atualizacao_bancos():
+    data = datetime.utcfromtimestamp(os.stat('bancos.csv').st_ctime)
+    return data.strftime('%d/%m/%Y').strip()
 
 def datas_exemplos() -> dict:
     proxima_data = (datetime.now() + timedelta(days=5)).strftime("%d%m%Y")
@@ -164,7 +169,8 @@ def inicio():
     baixa_bancos()
     return render_template('inicio.html',
                             quantidade_calculos = busca_total_calculos_diarios(),
-                            datas_exemplos = datas_exemplos()
+                            datas_exemplos = datas_exemplos(),
+                            data_atualizacao_bancos = atualizacao_bancos(),
                             )
 
 
